@@ -5,14 +5,15 @@ from exp.exp_main import Exp_Main
 import random
 import numpy as np
 
-fix_seed = 2021
+# 재생성시 동일 결과를 위한 시드 고정
+fix_seed = 2022
 random.seed(fix_seed)
 torch.manual_seed(fix_seed)
 np.random.seed(fix_seed)
 
 parser = argparse.ArgumentParser(description='Autoformer & Transformer family for Time Series Forecasting')
 
-# basic config
+# 기본 설정
 parser.add_argument('--is_training', type=int, required=True, default=1, help='status')
 parser.add_argument('--model_id', type=str, required=True, default='test', help='model id')
 parser.add_argument('--model', type=str, required=True, default='Autoformer',
@@ -39,7 +40,10 @@ parser.add_argument('--pred_len', type=int, default=96, help='prediction sequenc
 parser.add_argument('--individual', action='store_true', default=False, help='DLinear: a linear layer for each variate(channel) individually')
 # Formers 
 parser.add_argument('--embed_type', type=int, default=0, help='0: default 1: value embedding + temporal embedding + positional embedding 2: value embedding + temporal embedding 3: value embedding + positional embedding 4: value embedding')
-parser.add_argument('--enc_in', type=int, default=7, help='encoder input size') # DLinear with --individual, use this hyperparameter as the number of channels
+
+# DLinear with --individual, use this hyperparameter as the number of channels
+parser.add_argument('--enc_in', type=int, default=7, help='encoder input size')
+
 parser.add_argument('--dec_in', type=int, default=7, help='decoder input size')
 parser.add_argument('--c_out', type=int, default=7, help='output size')
 parser.add_argument('--d_model', type=int, default=512, help='dimension of model')
