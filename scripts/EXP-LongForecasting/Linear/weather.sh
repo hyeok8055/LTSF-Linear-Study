@@ -10,7 +10,7 @@ fi
 ####################################
 # 변수 설정
 ####################################
-seq_len=336
+seq_len=72
 model_name=DLinear
 
 # DLinear-I를 사용하려면  --individual  추가하면 됨
@@ -31,14 +31,19 @@ model_name=DLinear
 python -u run_longExp.py \  
   --is_training 1 \        
   --root_path ./dataset/ \  
-  --data_path weather.csv \ 
-  --model_id weather_$seq_len'_'96 \ 
+  --data_path powerplant1.csv \ 
+  --model_id powerplant1_$seq_len'_'24 \ 
   --model $model_name \     
   --data custom \          
-  --features M \            
+  --features M \
+  --target target \            
   --seq_len $seq_len \
-  --pred_len 96 \
+  --pred_len 24 \
+  --individual False \
   --enc_in 21 \
   --des 'Exp' \
-  --itr 1 --batch_size 16  >logs/LongForecasting/$model_name'_'weather_$seq_len'_'96.log
+  --itr 1 \
+  --train_epochs 100 \
+  --batch_size 32 \
+  0> >logs/LongForecasting/$model_name'_'powerplant1_$seq_len'_'24.log
 
