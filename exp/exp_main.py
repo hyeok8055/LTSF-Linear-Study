@@ -337,7 +337,10 @@ class Exp_Main(Exp_Basic):
                         else:
                             outputs = self.model(batch_x, batch_x_mark, dec_inp, batch_y_mark)
                 pred = outputs.detach().cpu().numpy()  # .squeeze()
-                preds.append(pred)
+                
+                # 실제 값으로 예측하기 위해 다음과 같이 코드 작성
+                for data in pred:
+                    preds.append(pred_data.inverse_transform(data))
 
         preds = np.array(preds)
         preds = preds.reshape(-1, preds.shape[-2], preds.shape[-1])
