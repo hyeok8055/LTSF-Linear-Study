@@ -16,7 +16,7 @@ model_name=Autoformer
 seq_len=96
 label_len=36
 pred_len=96
-learning_rate=0.0001
+learning_rate=0.00005
 batch_size=128
 # 1 은 학습 3은 예측
 is_training=1
@@ -25,7 +25,7 @@ ckpt='./ckpt/'
 python -u run.py \
 --is_training $is_training \
 --root_path ./dataset/ \
---data_path all_dataset.csv \
+--data_path all_dataset_3year_minus_version.csv \
 --model_id seq_len_$seq_len_$pred_len \
 --model $model_name \
 --data custom \
@@ -46,6 +46,6 @@ python -u run.py \
 --des 'Exp' \
 --batch_size $batch_size \
 --itr 1 \
---train_epochs 50 \
---patience 12 \
+--train_epochs 20 \
+--patience 6 \
 |tee logs/LongForecasting/$model_name'_seq_len_'$seq_len'_''_pred_len_'$pred_len'_lr_'$learning_rate'_batch_'$batch_size.log
